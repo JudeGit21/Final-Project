@@ -3,15 +3,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class BowStringController : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] 
     private BowString bowStringRenderer;
 
     private XRGrabInteractable interactable;
 
-    [SerializeField]
-    private Transform midPointGrabObject;        // the cube you actually grab
-    [SerializeField]
-    private Transform midPointVisualObject;      // the small visual point that follows the grab cube
+    [SerializeField] 
+    private Transform midPointGrabObject;
 
     private Transform interactor;
 
@@ -29,11 +27,7 @@ public class BowStringController : MonoBehaviour
     private void ResetBowString(SelectExitEventArgs arg0)
     {
         interactor = null;
-
-        // Reset positions when you release the string
         midPointGrabObject.localPosition = Vector3.zero;
-        midPointVisualObject.localPosition = Vector3.zero;
-
         bowStringRenderer.CreateString(null);
     }
 
@@ -46,11 +40,7 @@ public class BowStringController : MonoBehaviour
     {
         if (interactor != null)
         {
-            // Make visual midpoint follow the grab midpoint
-            midPointVisualObject.position = midPointGrabObject.position;
-
-            // Update the string using the visual midpoint
-            bowStringRenderer.CreateString(midPointVisualObject.position);
+            bowStringRenderer.CreateString(midPointGrabObject.transform.position);
         }
     }
 }
